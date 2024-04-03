@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: #0077be; /* Sea blue background color */
+  font-family: Poppins, sans-serif; /* Set Poppins font */
+  margin: 0; /* Remove default margin */
+  position: relative; /* Set position to relative to allow absolute positioning of watermark */
+}
+
+.container {
+  background-color: #fff; /* White background for the movable container */
+  padding: 30px;
+  border-radius: 10px;
+  margin: 80px auto 50px; /* Adjust margin to create space below the header */
+  width: 500px; /* Adjust width as needed */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center; /* Center the heading text */
+}
+
+header {
+  position: fixed; /* Make the header fixed */
+  top: 0; /* Stick the header to the top */
+  left: 0; /* Align the header to the left */
+  width: 100%; /* Make the header span the full width */
+  background-color: #0077be; /* Sea blue background color */
+  color: white; /* Set text color to white */
+  padding: 10px 0; /* Add padding to the header */
+  z-index: 999; /* Set a high z-index to ensure the header stays on top */
+}
+
+.logo {
+  width: 150px; /* Adjust logo width */
+}
+
+.child-writing-exams {
+  font-size: 16px;
+}
+
+form {
+  text-align: left; /* Align form elements to the left */
+  position: relative; /* Set position to relative to allow absolute positioning of loading spinner */
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotation 2s linear infinite;
+  display: none; /* Initially hide spinner */
+}
+
+.loading-spinner::before,
+.loading-spinner::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 3px dotted black; /* Changed border color to black */
+  animation: rotationBack 2s linear infinite;
+}
+
+.loading-spinner::after {
+  border-color: orange; /* Changed border color to orange */
+  animation: rotationBack 1s linear infinite, rotation 2s linear infinite;
+  inset: 6px;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotationBack {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+/* Other styles you might want to add */
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.checkbox-label {
+  display: block;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Dots pattern */
+body::after {
+  content: "Nesmac_S Tech Press"; /* Watermark text */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.1); /* Set watermark color and transparency */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(#ffffff 5%, transparent 5%),
+    radial-gradient(#ffffff 5%, transparent 5%);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-text">
+    <h2>Nesmac_S Tech Press Consult Result Checker</h2>
+  </div>
+</header>
+
+<div class="container">
+
+  <form id="resultForm">
+    <label for="indexNumber"><b>Index Number</b></label>
+    <input type="text" placeholder="Enter Index Number" name="indexNumber" id="indexNumber" required>
+
+    <label for="confirmIndexNumber"><b>Confirm Index Number</b></label>
+    <input type="text" placeholder="Confirm Index Number" name="confirmIndexNumber" id="confirmIndexNumber" required>
+  
+   
+
+ <label for="examType"><b>Select Exam Type</b></label>
+    <select id="examType" name="examType" required>
+      <option value="MOCK">MOCK</option>
+      <option value="EOTE">EOTE</option>
+      <option value="MTEST">MTEST</option>
+    </select>
+
+    <label for="examYear"><b>Exam Year</b></label>
+    <input type="text" placeholder="Enter Exam Year" name="examYear" id="examYear" required>
+  
+    <label for="serialNumber"><b>Serial Number</b></label>
+    <input type="text" placeholder="Enter Serial Number" name="serialNumber" id="serialNumber" required>
+
+    <label for="pin"><b>PIN</b></label>
+    <input type="text" placeholder="Enter PIN" name="pin" id="pin" required>
+
+    <!-- Checkbox for confirming not a robot -->
+    <label class="checkbox-label"><input type="checkbox" id="notRobotCheckbox" required> I'm not a robot</label>
+
+    <div class="captcha">
+      <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+    </div>
+
+    <!-- Loading spinner -->
+    <div
+
+ class="loading-spinner"></div>
+
+    <button type="button" onclick="displayMessage()">Check Results</button>
+  </form>
+
+</div>
+
+<script>
+function displayMessage() {
+  // Show loading spinner
+  var spinner = document.querySelector('.loading-spinner');
+  spinner.style.display = 'block';
+
+  // Delay for 3 seconds before displaying message
+  setTimeout(function() {
+    // Hide loading spinner
+    spinner.style.display = 'none';
+    
+    // Display message
+    alert("Hello, dear loved one, all student records are yet to encrypted and made public. Thank you by Nestor Macintosh Mawuli");
+  }, 3000);
+}
+
+// Create and autoplay audio element
+var audio = new Audio();
+audio.src = "https://www.bensound.com/royalty-free-music/track/hope-and-heisenberg-smooth-epic";
+audio.autoplay = true;
+</script>
+
+</body>
+</html>
