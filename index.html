@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
-        /* Base Styles */
         body, html {
             height: 100%;
             margin: 0;
@@ -43,8 +42,6 @@
             width: 100px;
             margin-bottom: 15px;
         }
-
-        /* Button Styles */
         .action-buttons {
             display: flex;
             gap: 8px;
@@ -70,8 +67,6 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
-
-        /* Footer */
         .footer {
             display: flex;
             flex-direction: column;
@@ -88,19 +83,13 @@
             font-size: 18px;
             color: #25D366;
         }
-
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .main-wrapper { padding: 15px; max-width: 90%; }
         }
-
-        /* Spinner */
         .spinner {
             display: none;
             width: 40px;
@@ -111,7 +100,6 @@
             animation: spin 0.8s linear infinite;
             margin: 20px auto;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -119,15 +107,12 @@
     </style>
 
     <script>
-        // Disable source code view and keyboard shortcuts
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('keydown', function(event) {
             if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
                 event.preventDefault();
             }
         });
-
-        // Toggle password visibility
         function togglePassword() {
             const passwordField = document.getElementById('password');
             const eyeIcon = document.querySelector('.toggle-password i');
@@ -139,14 +124,11 @@
                 eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
             }
         }
-
-        // Validate credentials and open file in print view
         function validateCredentials() {
             const spinner = document.querySelector('.spinner');
             spinner.style.display = 'block';
             const username = document.querySelector('[name="username"]').value;
             const password = document.querySelector('[name="password"]').value;
-
             const fileMapping = {
                 "1011060075001": {
                     "Ajovi@nes2024": "https://pdflink.to/f55f5fd1/#zoom=fit",
@@ -156,15 +138,11 @@
                     "ADT12024MascdPresby": "https://pdflink.to/ef099a47/"
                 }
             };
-
             setTimeout(() => {
                 spinner.style.display = 'none';
                 if (fileMapping[username] && fileMapping[username][password]) {
-                    // Open file in a new tab and trigger the print prompt
                     const fileUrl = fileMapping[username][password];
                     const fileWindow = window.open(fileUrl, "_blank");
-
-                    // Trigger print once the new tab is loaded
                     fileWindow.onload = function() {
                         fileWindow.print();
                     };
@@ -173,8 +151,6 @@
                 }
             }, 1000);
         }
-
-        // Initialize on page load
         window.onload = function() {
             document.getElementById('current-year').textContent = new Date().getFullYear();
         };
@@ -187,7 +163,9 @@
         <h3 class="account-subtitle"><b>SEKONDI PRESBY BASIC SCHOOL PORTAL</b></h3>
 
         <div class="action-buttons">
-            <button type="button" class="btn btn-primary">Admission</button>
+            <a href="https://forms.cloud.microsoft/r/CDjdCg2jkh?origin=lprLink" target="_blank" class="btn btn-primary">
+                Admission
+            </a>
             <button type="button" class="btn btn-primary">Become An Alumni</button>
         </div>
 
@@ -206,7 +184,6 @@
             </div>
         </form>
 
-        <!-- Spinner -->
         <div class="spinner"></div>
 
         <div class="footer">
