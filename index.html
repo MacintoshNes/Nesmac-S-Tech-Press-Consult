@@ -104,6 +104,41 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Iframe modal */
+        .iframe-container {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .iframe-wrapper {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 90%;
+            height: 90%;
+            position: relative;
+        }
+        .iframe-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close-iframe {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 10000;
+        }
     </style>
 
     <script>
@@ -151,6 +186,12 @@
                 }
             }, 1000);
         }
+        function openAdmissionForm() {
+            document.querySelector('.iframe-container').style.display = 'flex';
+        }
+        function closeAdmissionForm() {
+            document.querySelector('.iframe-container').style.display = 'none';
+        }
         window.onload = function() {
             document.getElementById('current-year').textContent = new Date().getFullYear();
         };
@@ -163,9 +204,7 @@
         <h3 class="account-subtitle"><b>SEKONDI PRESBY BASIC SCHOOL PORTAL</b></h3>
 
         <div class="action-buttons">
-            <a href="https://forms.cloud.microsoft/r/CDjdCg2jkh?origin=lprLink" target="_blank" class="btn btn-primary">
-                Admission
-            </a>
+            <button type="button" class="btn btn-primary" onclick="openAdmissionForm()">Admission</button>
             <button type="button" class="btn btn-primary">Become An Alumni</button>
         </div>
 
@@ -192,6 +231,14 @@
             </a>
             <div class="developer-names">Developed by The Brothers:<br>Nestor Mawuli Macintosh<br>Isaac Julian Mintah</div>
             <div>&copy; <span id="current-year"></span></div>
+        </div>
+    </div>
+
+    <!-- Iframe Modal for Microsoft Form -->
+    <div class="iframe-container">
+        <div class="iframe-wrapper">
+            <button class="close-iframe" onclick="closeAdmissionForm()">Close</button>
+            <iframe src="https://forms.office.com/r/CDjdCg2jkh?origin=lprLink"></iframe>
         </div>
     </div>
 
